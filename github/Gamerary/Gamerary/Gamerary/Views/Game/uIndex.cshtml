@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Gamerary.Models.Game>
+
+@{
+    ViewBag.Title = "uIndex";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h1>Oyun Listesi</h1>
+<table class="table table-hover table-responsive">
+    <tr>
+        <th>
+            Oyun İsmi
+        </th>
+        <th>
+            Platform
+        </th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>
+            $
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(Model => item.gameName)
+            </td>
+            <td>
+                @Html.DisplayFor(Model => item.GamePlatform.platformName)
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                @Html.DisplayFor(Model => item.price)
+            </td>
+            <td>
+
+                @Html.ActionLink("Oyun Bilgileri", "uDetails", new { id = item.gameID }, new { @class = "btn btn-success" })
+                <div class="row">
+                    <div class="col">
+                        <hr>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>
+

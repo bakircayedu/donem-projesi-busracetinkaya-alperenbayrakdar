@@ -1,0 +1,160 @@
+﻿@model Gamerary.Models.UserAccount
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h1>Kayıt Ol</h1>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-horizontal">
+
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.uFirstName, "İsim:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.uFirstName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.uFirstName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.uLastName, "Soy İsim:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.uLastName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.uLastName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.uBirthdate, "Doğum Tarihi:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.uBirthdate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.uBirthdate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.uUserAddress, "Adres:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.uUserAddress, new
+                        {
+                            htmlAttributes = new
+                   {
+                       @class = "form-control",
+                       @onkeydown = "return TextChanged(event)"
+                   }
+                   })
+                        @Html.ValidationMessageFor(model => model.uUserAddress, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.uPhoneNumber, "Telefon Numarası:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.uPhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.uPhoneNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.uEMail, "E-mail:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.uEMail, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.uEMail, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.uPasswrd, "Şifre:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(model => model.uPasswrd, new { id = "password" })
+                        @Html.ValidationMessageFor(model => model.uPasswrd, "", new { @class = "text-danger" })
+                        <p></p><br>
+                        <p>
+                            <a href="https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=6698&MevzuatTur=1&MevzuatTertip=5" target="_blank">
+                                KVKK metnini
+                            </a> okudum ve kabul ediyorum.
+                        </p>
+                        <p></p><br>
+                        <p></p><br>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <p></p><br>
+                        <p></p><br>
+                        <input type="submit" value="Kaydet" id="saveBtn" class="btn btn-success" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="toggle-radio">
+                        <input type="radio" onclick="kvkOnay()" name="Kvkk" checked="checked" id="yes">
+                        <input type="radio" onclick="kvkkRed()" name="Kvkk" id="no">
+                        <div class="switch">
+                            <label for="yes">Evet</label>
+                            <label for="no">Hayır</label>
+
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col">
+                        <hr>
+                    </div>
+                </div>
+                <div>
+                    <input type="checkbox" class="invisible" />
+                </div>
+                <div>
+                    <input type="checkbox" class="invisible" />
+                </div>
+                <div>
+                    <input type="checkbox" class="invisible" />
+                </div>
+                <center>
+                    <img src="~/Imgs/signup.png" width="220" />
+                </center>
+
+            </div>
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Geri Dön", "Login", new { id = 1 }, new { @class = "btn btn-primary" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        function kvkkRed (){
+            alert("Kvkk aydınlatma metnini kabul etmeden kayıt olamazsınız.");
+            document.getElementById("saveBtn").style.display = "none";
+
+        }
+        function kvkOnay() {
+            document.getElementById("saveBtn").style.display = "block";
+        }
+
+    </script>
+}

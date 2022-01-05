@@ -1,0 +1,348 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+    <style>
+        body {
+            background-color: #292845;
+            color: aliceblue;
+        }
+
+        #password {
+            color: black;
+        }
+
+        .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+            background-color: lightslategray;
+        }
+
+        .btn {
+            border: 3px solid black;
+            background-color: white;
+            color: black;
+            padding: 10px 22px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-success {
+            border-color: #04AA6D;
+            color: green;
+        }
+
+            .btn-success:hover {
+                background-color: #04AA6D;
+                color: white;
+            }
+
+        .btn-primary {
+            border-color: #2196F3;
+            color: dodgerblue;
+        }
+
+            .btn-primary:hover {
+                background: #2196F3;
+                color: white;
+            }
+
+        .btn-warning {
+            border-color: #ff9800;
+            color: orange;
+        }
+
+            .btn-warning:hover {
+                background: #ff9800;
+                color: white;
+            }
+
+        .btn-danger {
+            border-color: #f44336;
+            color: red;
+        }
+
+            .btn-danger:hover {
+                background: #f44336;
+                color: white;
+            }
+
+
+        .default:hover {
+            background: #e7e7e7;
+        }
+
+        .carousel-inner > .item > img,
+        .carousel-inner > .item > a > img {
+            width: 70%;
+            margin: auto;
+        }
+
+
+        #oyunBtn, #oyunBtn1, #oyunBtn2 {
+            display: inline-block;
+            border-radius: 8px;
+            /*background-color: #0f566e;*/
+            background-color: #cf5600;
+            border: #092f6d;
+            color: #b9b9b9;
+            text-align: center;
+            font-size: 17px;
+            padding: 15px;
+            width: 175px;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px;
+            position: center
+        }
+
+            #oyunBtn span {
+                cursor: pointer;
+                display: inline-block;
+                position: relative;
+                transition: 0.5s;
+            }
+
+            #oyunBtn:hover span {
+                padding-right: 25px;
+            }
+
+                #oyunBtn:hover span:after {
+                    opacity: 1;
+                    right: 0;
+                }
+
+            #oyunBtn1 span {
+                cursor: pointer;
+                display: inline-block;
+                position: relative;
+                transition: 0.5s;
+            }
+
+            #oyunBtn1:hover span {
+                padding-right: 25px;
+            }
+
+                #oyunBtn1:hover span:after {
+                    opacity: 1;
+                    right: 0;
+                }
+
+            #oyunBtn2 span {
+                cursor: pointer;
+                display: inline-block;
+                position: relative;
+                transition: 0.5s;
+            }
+
+            #oyunBtn2:hover span {
+                padding-right: 25px;
+            }
+
+                #oyunBtn2:hover span:after {
+                    opacity: 1;
+                    right: 0;
+                }
+
+            #oyunBtn span:after {
+                content: '\00bb';
+                position: absolute;
+                opacity: 0;
+                top: 0;
+                right: -20px;
+                transition: 0.5s;
+            }
+
+            #oyunBtn1 span:after {
+                content: '\00bb';
+                position: absolute;
+                opacity: 0;
+                top: 0;
+                right: -20px;
+                transition: 0.5s;
+            }
+
+            #oyunBtn2 span:after {
+                content: '\00bb';
+                position: absolute;
+                opacity: 0;
+                top: 0;
+                right: -20px;
+                transition: 0.5s;
+            }
+
+        .toggle-radio body {
+            font-family: sans-serif;
+            font-weight: 800;
+            background: #eee;
+        }
+
+        .switch {
+            position: absolute;
+            top: 80%;
+            left: 30%;
+            width: 150px;
+            height: 50px;
+            text-align: center;
+            margin: -30px 0 0 -75px;
+            background: #00bc9c;
+            transition: all 0.2s ease;
+            border-radius: 25px;
+        }
+
+            .switch span {
+                position: absolute;
+                width: 20px;
+                height: 4px;
+                top: 80%;
+                left: 30%;
+                margin: -20px 0px 0px 20px;
+                background: #fff;
+                display: block;
+                transform: rotate(-45deg);
+                transition: all 0.2s ease;
+            }
+
+                .switch span:after {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    width: 4px;
+                    height: 12px;
+                    margin-top: -8px;
+                    background: #fff;
+                    transition: all 0.2s ease;
+                }
+
+        input[type=radio] {
+            display: none;
+        }
+
+        .switch label {
+            cursor: pointer;
+            color: rgba(0,0,0,0.2);
+            width: 60px;
+            line-height: 50px;
+            transition: all 0.2s ease;
+        }
+
+        label[for=yes] {
+            position: absolute;
+            left: 0px;
+            height: 20px;
+        }
+
+        label[for=no] {
+            position: absolute;
+            right: 0px;
+        }
+
+        #no:checked ~ .switch {
+            background: #eb4f37;
+        }
+
+            #no:checked ~ .switch span {
+                background: #fff;
+                margin-left: 17px;
+            }
+
+                #no:checked ~ .switch span:after {
+                    background: #fff;
+                    height: 20px;
+                    margin-top: -8px;
+                    margin-left: 8px;
+                }
+
+        #yes:checked ~ .switch label[for=yes] {
+            color: #fff;
+        }
+
+        #no:checked ~ .switch label[for=no] {
+            color: #fff;
+        }
+
+
+        #gamelistImg {
+            background-image: url('../../Imgs/loan-library-icon.png');
+            background-repeat: no-repeat;
+            background-position: bottom;
+        }
+    </style>
+
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top ">
+
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-left" href="/Home/uIndex">
+
+
+                <img src="~/Imgs/output-onlinepngtools.png" width="90" />
+
+            </a>
+            @Html.ActionLink("Gamerary", "uIndex", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("Ana Sayfa", "uIndex", "Home", new { id = 1 }, new { @class = "navbar-brand" })
+        </div>
+        <div class="container">
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Oyunlar", "uIndex", "Game/uIndex")</li>
+                        <li>@Html.ActionLink("Oyun Listem", "", "GameList/Index/1")</li>
+                        <li>@Html.ActionLink("Listeye Oyun Ekle", "", "GameList/Create")</li>
+                    }
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="navbar-right"><a>Hoşgeldin - @User.Identity.Name</a></li>
+                        <li class="navbar-right" onclick="logout()">@Html.ActionLink("Çıkış Yap", "Logout", "UserAccounts")</li>
+                    }
+
+                    else
+                    {
+                        <li class="navbar-right">@Html.ActionLink("Admin Girişi", "Login", "Account")</li>
+                        <li class="navbar-right">@Html.ActionLink("Kullanıcı Girişi", "Login", "UserAccounts")</li>
+                        <li class="navbar-right">@Html.ActionLink("Kayıt Ol", "Create", "UserAccounts")</li>
+                    }
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Gamerary</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        function logout() {
+            alert("Çıkış Yaptınız.");
+        }
+
+    </script>
+
+
+</body>
+</html>

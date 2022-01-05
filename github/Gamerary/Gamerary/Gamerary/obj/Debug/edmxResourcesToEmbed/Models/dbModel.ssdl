@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GameraryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="accountID" />
+    </Key>
+    <Property Name="accountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="firstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="lastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="birthdate" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="userAddress" Type="nvarchar" MaxLength="200" />
+    <Property Name="phoneNumber" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="eMail" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="passwrd" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="uAccountID" Type="int" />
+  </EntityType>
+  <EntityType Name="Game">
+    <Key>
+      <PropertyRef Name="gameID" />
+    </Key>
+    <Property Name="gameID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="platformID" Type="int" />
+    <Property Name="genreID" Type="int" />
+    <Property Name="gameName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="publisherName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="developerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="releaseDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="price" Type="money" Nullable="false" />
+    <Property Name="rating" Type="float" />
+    <Property Name="content" Type="nvarchar" MaxLength="500" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GameList">
+    <Key>
+      <PropertyRef Name="gameListID" />
+    </Key>
+    <Property Name="gameListID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="uAccountID" Type="int" />
+    <Property Name="gameID" Type="int" />
+  </EntityType>
+  <EntityType Name="GamePlatform">
+    <Key>
+      <PropertyRef Name="platformID" />
+    </Key>
+    <Property Name="platformID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="platformName" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="Genre">
+    <Key>
+      <PropertyRef Name="genreID" />
+    </Key>
+    <Property Name="genreID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="genre" Type="nvarchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserAccount">
+    <Key>
+      <PropertyRef Name="uAccountID" />
+    </Key>
+    <Property Name="uAccountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="uFirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="uLastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="uBirthdate" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="uUserAddress" Type="nvarchar" MaxLength="200" />
+    <Property Name="uPhoneNumber" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="uEMail" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="uPasswrd" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Account_UserAccount">
+    <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="0..1" />
+    <End Role="Account" Type="Self.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserAccount">
+        <PropertyRef Name="uAccountID" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="uAccountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Game_GamePlatform">
+    <End Role="GamePlatform" Type="Self.GamePlatform" Multiplicity="0..1" />
+    <End Role="Game" Type="Self.Game" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GamePlatform">
+        <PropertyRef Name="platformID" />
+      </Principal>
+      <Dependent Role="Game">
+        <PropertyRef Name="platformID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Game_Genre">
+    <End Role="Genre" Type="Self.Genre" Multiplicity="0..1" />
+    <End Role="Game" Type="Self.Game" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genre">
+        <PropertyRef Name="genreID" />
+      </Principal>
+      <Dependent Role="Game">
+        <PropertyRef Name="genreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GameList_Game">
+    <End Role="Game" Type="Self.Game" Multiplicity="0..1" />
+    <End Role="GameList" Type="Self.GameList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Game">
+        <PropertyRef Name="gameID" />
+      </Principal>
+      <Dependent Role="GameList">
+        <PropertyRef Name="gameID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GameList_UserAccount">
+    <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="0..1" />
+    <End Role="GameList" Type="Self.GameList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserAccount">
+        <PropertyRef Name="uAccountID" />
+      </Principal>
+      <Dependent Role="GameList">
+        <PropertyRef Name="uAccountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GameraryModelStoreContainer">
+    <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Game" EntityType="Self.Game" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GameList" EntityType="Self.GameList" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GamePlatform" EntityType="Self.GamePlatform" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Account_UserAccount" Association="Self.FK_Account_UserAccount">
+      <End Role="UserAccount" EntitySet="UserAccount" />
+      <End Role="Account" EntitySet="Account" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Game_GamePlatform" Association="Self.FK_Game_GamePlatform">
+      <End Role="GamePlatform" EntitySet="GamePlatform" />
+      <End Role="Game" EntitySet="Game" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Game_Genre" Association="Self.FK_Game_Genre">
+      <End Role="Genre" EntitySet="Genre" />
+      <End Role="Game" EntitySet="Game" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GameList_Game" Association="Self.FK_GameList_Game">
+      <End Role="Game" EntitySet="Game" />
+      <End Role="GameList" EntitySet="GameList" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GameList_UserAccount" Association="Self.FK_GameList_UserAccount">
+      <End Role="UserAccount" EntitySet="UserAccount" />
+      <End Role="GameList" EntitySet="GameList" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,86 @@
+﻿@model Gamerary.Models.Game
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Oyun Detayları</h1>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.LabelFor(model => model.gameName, "Oyun İsmi:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gameName)
+        </dd>
+        <dt>
+            @Html.LabelFor(model => model.GamePlatform.platformName, "Platform:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GamePlatform.platformName)
+        </dd>
+
+        <dt>
+            @Html.LabelFor(model => model.Genre.genre1, "Tür:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Genre.genre1)
+        </dd>
+        <dt>
+            @Html.LabelFor(model => model.publisherName, "Yayıncı Firma İsmi:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.publisherName)
+        </dd>
+
+        <dt>
+            @Html.LabelFor(model => model.developerName, "Geliştirici İsmi")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.developerName)
+        </dd>
+
+        <dt>
+            @Html.LabelFor(model => model.releaseDate, "Çıkış Tarihi:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.releaseDate)
+        </dd>
+
+        <dt>
+            @Html.LabelFor(model => model.price, "Fiyat ($):")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+
+        <dt>
+            @Html.LabelFor(model => model.content, "İçerik:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.content)
+        </dd>
+        <dd>
+            <br />
+        </dd>
+        <dd>
+            @Html.ActionLink("Düzenle", "Edit", new { id = Model.gameID }, new { @class = "btn btn-primary" })
+        </dd>
+    </dl>
+
+</div>
+<p>
+
+    @Html.ActionLink("Listeye Geri Dön", "Index", new { id = Model.gameID }, new { @class = "btn btn-success" })
+</p>
